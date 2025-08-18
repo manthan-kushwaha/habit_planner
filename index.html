@@ -1,196 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <title>Habit Planner Free Tool | Manthan Kushwaha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habit Planner - Build Daily Habits & Track Progress | Manthan Kushwaha</title>
-  <meta name="description" content="Habit Planner is a free online tool to create, organize, and track your daily habits. Build consistency, stay productive, and achieve your goals with this simple habit tracker.">
-  <meta name="keywords" content="habit planner, daily habit tracker, free habit planner, productivity tool, habit builder, manthan kushwaha">
+  <meta name="description" content="Use the free Habit Planner tool by Manthan Kushwaha to track daily habits, stay consistent, and boost productivity. Simple, effective, and free habit tracker.">
+  <meta name="keywords" content="habit planner, habit tracker, free habit tool, daily routine planner, productivity tool, goal tracker, online habit tracker">
   <meta name="author" content="Manthan Kushwaha">
-  <meta name="robots" content="index, follow">
+  <meta name="publisher" content="GitHub">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://manthan-kushwaha.github.io/habit_planner/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Habit Planner - Free Online Habit Tracker">
-  <meta property="og:description" content="Track your daily habits with this free online planner. Stay consistent, productive, and achieve your personal growth goals.">
-  <meta property="og:type" content="website">
+  <meta property="og:title" content="Habit Planner Free Tool | Manthan Kushwaha">
+  <meta property="og:description" content="Track your daily habits with the free Habit Planner tool. Stay consistent, improve productivity, and achieve your goals.">
   <meta property="og:url" content="https://manthan-kushwaha.github.io/habit_planner/">
-  <meta property="og:image" content="https://manthan-kushwaha.github.io/habit_planner/preview.png">
-
+  <meta property="og:type" content="website">
+  
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Habit Planner - Build Daily Habits & Track Progress">
-  <meta name="twitter:description" content="Create and track your daily habits with this free online habit planner tool.">
-  <meta name="twitter:image" content="https://manthan-kushwaha.github.io/habit_planner/preview.png">
-
+  <meta name="twitter:title" content="Habit Planner Free Tool | Manthan Kushwaha">
+  <meta name="twitter:description" content="Stay consistent and achieve your goals with this free online Habit Planner tool.">
+  
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f9fafc;
       margin: 0;
-      background: #f4f6f8;
-      color: #222;
+      padding: 20px;
       line-height: 1.6;
     }
-
     header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 20px;
       text-align: center;
+      margin-bottom: 20px;
     }
-
     h1 {
-      margin: 0;
-      font-size: 26px;
+      color: #333;
     }
-
+    #habitForm {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    #habitForm input {
+      padding: 10px;
+      width: 250px;
+      margin-right: 10px;
+    }
+    #habitForm button {
+      padding: 10px 15px;
+      cursor: pointer;
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    #habitList {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      padding: 0;
+      list-style: none;
+    }
+    #habitList li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    #habitList li.completed {
+      text-decoration: line-through;
+      color: gray;
+      background: #e6f7e6;
+    }
+    button.remove {
+      background: red;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
     main {
-      max-width: 900px;
-      margin: 30px auto;
+      max-width: 800px;
+      margin: auto;
       padding: 20px;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
     section {
-      margin-bottom: 30px;
+      margin-top: 30px;
     }
-
-    .profile-card {
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 20px;
-      background: #fafafa;
-    }
-
-    .profile-card h2 {
-      margin-top: 0;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
     }
-
-    th,
-    td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
+    table, th, td {
+      border: 1px solid #ddd;
     }
-
-    th {
-      background: #2c3e50;
-      color: #fff;
-    }
-
-    .faq h3 {
-      margin-top: 15px;
-    }
-
-    footer {
+    th, td {
+      padding: 8px;
       text-align: center;
-      padding: 15px;
-      background: #2c3e50;
-      color: #fff;
-      margin-top: 30px;
     }
   </style>
 </head>
-
 <body>
+
   <header>
-    <h1>📅 Habit Planner - Build & Track Daily Habits</h1>
+    <h1>📅 Habit Planner Free Tool</h1>
+    <p>Track your habits, stay consistent, and boost your productivity.</p>
   </header>
 
+  <!-- Habit Tracker -->
+  <div id="habitForm">
+    <input type="text" id="habitInput" placeholder="Enter new habit...">
+    <button onclick="addHabit()">Add Habit</button>
+  </div>
+  <ul id="habitList"></ul>
+
+  <!-- SEO Content -->
   <main>
-    <!-- Tool Overview -->
     <section>
-      <h2>About Habit Planner Tool</h2>
-      <p>
-        The <strong>Habit Planner</strong> is a free online tool that helps you
-        create, organize, and track your daily habits. Whether you want to
-        <em>build consistency, improve productivity, or achieve personal goals</em>,
-        this planner makes it simple to manage your routine effectively.
-      </p>
-      <p>
-        With features like <strong>daily tracking, progress organization, and easy habit
-        editing</strong>, you can design your ideal routine and stick to it.
-      </p>
+      <h2>About This Tool</h2>
+      <p>The <strong>Habit Planner</strong> by <strong>Manthan Kushwaha</strong> is a free online tool to help you
+        create and track your daily habits. By organizing your routine, you can stay consistent, boost productivity,
+        and achieve long-term goals step by step.</p>
     </section>
 
-    <!-- Benefits -->
     <section>
-      <h2>✨ Why Use Habit Planner?</h2>
-      <ul>
-        <li>✅ Organize habits hour by hour</li>
-        <li>✅ Stay consistent with reminders</li>
-        <li>✅ Improve productivity & focus</li>
-        <li>✅ Free & easy to use in your browser</li>
-      </ul>
-    </section>
-
-    <!-- Manthan Kushwaha Intro -->
-    <section class="profile-card">
       <h2>👤 About Manthan Kushwaha</h2>
-      <p>
-        Hi, I’m <strong>Manthan Kushwaha</strong>, a passionate <em>SEO specialist,
-        digital marketer, and web tools creator</em>. My mission is to simplify
-        digital tools and make productivity accessible for everyone.
-      </p>
+      <p>Hi, I’m <strong>Manthan Kushwaha</strong>, an SEO Specialist, Digital Marketer, and Web Tools Creator.
+        I build simple tools that make life easier and productivity accessible to everyone.</p>
+      
       <table>
-        <tr>
-          <th>Profile</th>
-          <th>Details</th>
-        </tr>
-        <tr>
-          <td>🌐 Website</td>
-          <td><a href="https://manthan-kushwaha.github.io" target="_blank">manthan-kushwaha.github.io</a></td>
-        </tr>
-        <tr>
-          <td>💼 LinkedIn</td>
-          <td><a href="https://linkedin.com/in/manthankushwaha" target="_blank">linkedin.com/in/manthankushwaha</a></td>
-        </tr>
-        <tr>
-          <td>🐦 Twitter</td>
-          <td><a href="https://twitter.com/yourseoguy" target="_blank">@yourseoguy</a></td>
-        </tr>
-        <tr>
-          <td>📸 Instagram</td>
-          <td><a href="https://instagram.com/yourseoguy" target="_blank">@yourseoguy</a></td>
-        </tr>
+        <tr><th>Profile</th><th>Link</th></tr>
+        <tr><td>🌐 Website</td><td><a href="https://manthan-kushwaha.github.io" target="_blank">manthan-kushwaha.github.io</a></td></tr>
+        <tr><td>💼 LinkedIn</td><td><a href="https://linkedin.com/in/manthankushwaha" target="_blank">linkedin.com/in/manthankushwaha</a></td></tr>
+        <tr><td>🐦 Twitter</td><td><a href="https://twitter.com/yourseoguy" target="_blank">@yourseoguy</a></td></tr>
+        <tr><td>📸 Instagram</td><td><a href="https://instagram.com/yourseoguy" target="_blank">@yourseoguy</a></td></tr>
       </table>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq">
-      <h2>❓ Frequently Asked Questions</h2>
+    <section>
+      <h2>❓ FAQ - Habit Planner</h2>
       <h3>1. What is a Habit Planner?</h3>
-      <p>
-        A habit planner is a simple tool that helps you track your daily habits,
-        stay consistent, and achieve your long-term goals by breaking them into
-        small daily actions.
-      </p>
+      <p>A habit planner helps you track your daily habits, stay consistent, and achieve your goals.</p>
 
       <h3>2. Is this Habit Planner free?</h3>
-      <p>✅ Yes! It is 100% free to use directly in your browser.</p>
+      <p>✅ Yes! It’s 100% free and works directly in your browser.</p>
 
-      <h3>3. Do I need to create an account?</h3>
-      <p>❌ No, you can start using the habit planner instantly without signup.</p>
+      <h3>3. Do I need to sign up?</h3>
+      <p>❌ No account is needed. Just start adding your habits instantly.</p>
 
-      <h3>4. Can I save and edit my habits?</h3>
-      <p>
-        Yes, you can save your habit plan locally and update it anytime to stay
-        consistent with your progress.
-      </p>
+      <h3>4. Can I save my progress?</h3>
+      <p>Yes, your progress is saved in your browser’s local storage automatically.</p>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Habit Planner by Manthan Kushwaha | All Rights Reserved</p>
-  </footer>
+  <script>
+    const habitInput = document.getElementById("habitInput");
+    const habitList = document.getElementById("habitList");
+
+    // Load saved habits
+    document.addEventListener("DOMContentLoaded", loadHabits);
+
+    function addHabit() {
+      const habit = habitInput.value.trim();
+      if (habit === "") return;
+
+      const li = createHabitElement(habit);
+      habitList.appendChild(li);
+
+      saveHabits();
+      habitInput.value = "";
+    }
+
+    function createHabitElement(habitText, completed = false) {
+      const li = document.createElement("li");
+      li.textContent = habitText;
+      if (completed) li.classList.add("completed");
+
+      li.addEventListener("click", () => {
+        li.classList.toggle("completed");
+        saveHabits();
+      });
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.classList.add("remove");
+      removeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        li.remove();
+        saveHabits();
+      });
+
+      li.appendChild(removeBtn);
+      return li;
+    }
+
+    function saveHabits() {
+      const habits = [];
+      document.querySelectorAll("#habitList li").forEach(li => {
+        habits.push({ text: li.childNodes[0].textContent, completed: li.classList.contains("completed") });
+      });
+      localStorage.setItem("habits", JSON.stringify(habits));
+    }
+
+    function loadHabits() {
+      const saved = JSON.parse(localStorage.getItem("habits")) || [];
+      saved.forEach(habit => {
+        const li = createHabitElement(habit.text, habit.completed);
+        habitList.appendChild(li);
+      });
+    }
+  </script>
 </body>
 </html>
