@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Habit Planner Free Tool | Manthan Kushwaha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Track and manage your daily habits easily with the Habit Planner Free Tool by Manthan Kushwaha. Stay productive with weekly tracking and progress visualization.">
   <meta name="keywords"
     content="habit planner, habit tracker tool, daily habit planner, productivity tool, weekly habit tracker, habit management app, habit tracker online">
   <meta name="author" content="Manthan Kushwaha">
   <meta name="publisher" content="GitHub">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://manthan-kushwaha.github.io/habit_planner/">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://manthan-kushwaha.github.io/habit_planner/">
 
   <style>
     body {
@@ -25,8 +25,9 @@
       align-items: center;
     }
 
-    h1 {
-      margin-bottom: 10px;
+    main {
+      width: 100%;
+      max-width: 800px;
     }
 
     .app {
@@ -34,8 +35,7 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 700px;
+      margin-bottom: 30px;
     }
 
     .habits {
@@ -94,29 +94,19 @@
       font-weight: bold;
     }
 
-    #addHabit {
-      background: #007bff;
-      color: #fff;
-    }
+    #addHabit { background: #007bff; color: #fff; }
+    #clear { background: #dc3545; color: #fff; }
 
-    #clear {
-      background: #dc3545;
-      color: #fff;
-    }
-
-    /* Intro Card */
-    .intro {
-      margin-top: 30px;
-      padding: 20px;
+    .intro, .faq {
       background: #fff;
+      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 700px;
-      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .intro h2 {
-      margin-bottom: 10px;
+    .intro h2, .faq h2 {
+      margin-top: 0;
     }
 
     .social-table {
@@ -129,20 +119,6 @@
     .social-table td {
       padding: 10px;
       border: 1px solid #ccc;
-    }
-
-    /* FAQ */
-    .faq {
-      margin-top: 30px;
-      max-width: 700px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .faq h2 {
-      margin-bottom: 15px;
     }
 
     .faq-item {
@@ -173,60 +149,24 @@
       </div>
     </div>
 
-    <!-- Intro Card -->
     <div class="intro">
       <h2>About the Creator</h2>
-      <p>Hi, I’m <strong>Manthan Kushwaha</strong>, passionate about creating free and useful web tools to improve
-        productivity, learning, and creativity.</p>
-
+      <p>Hi, I’m <strong>Manthan Kushwaha</strong>, passionate about creating free and useful web tools to improve productivity, learning, and creativity.</p>
       <table class="social-table">
-        <tr>
-          <th>Profile</th>
-          <th>Link</th>
-        </tr>
-        <tr>
-          <td>🌐 Portfolio</td>
-          <td><a href="https://manthan-kushwaha.github.io/" target="_blank">Visit Here</a></td>
-        </tr>
-        <tr>
-          <td>💼 LinkedIn</td>
-          <td><a href="https://www.linkedin.com/in/manthankushwaha" target="_blank">Connect</a></td>
-        </tr>
-        <tr>
-          <td>🐦 Twitter</td>
-          <td><a href="https://twitter.com/manthankush_" target="_blank">Follow</a></td>
-        </tr>
-        <tr>
-          <td>📷 Instagram</td>
-          <td><a href="https://instagram.com/manthan_kushwaha" target="_blank">Follow</a></td>
-        </tr>
+        <tr><th>Profile</th><th>Link</th></tr>
+        <tr><td>🌐 Portfolio</td><td><a href="https://manthan-kushwaha.github.io/" target="_blank">manthan-kushwaha.github.io</a></td></tr>
+        <tr><td>💼 LinkedIn</td><td><a href="https://in.linkedin.com/in/manthan-kushwaha-8baab5370" target="_blank">LinkedIn Profile</a></td></tr>
+        <tr><td>🐦 Twitter (X)</td><td><a href="https://twitter.com/manthankushwah5" target="_blank">@ManthanKushwah5</a></td></tr>
+        <tr><td>📸 Instagram</td><td><a href="https://www.instagram.com/your_seo_guy/" target="_blank">@your_seo_guy</a></td></tr>
       </table>
     </div>
 
-    <!-- FAQ Section -->
     <div class="faq">
       <h2>❓ Frequently Asked Questions</h2>
-
-      <div class="faq-item">
-        <h3>How does the Habit Planner work?</h3>
-        <p>This tool allows you to add your daily/weekly habits and track them by clicking on the day circles.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Is my data saved?</h3>
-        <p>Yes, your habits are saved locally in your browser using LocalStorage, so they remain even after closing the
-          page.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Can I clear all habits?</h3>
-        <p>Yes, just click on the 🗑 Clear button to reset everything.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Is this tool free?</h3>
-        <p>Absolutely! This tool is completely free to use and share.</p>
-      </div>
+      <div class="faq-item"><h3>How does the Habit Planner work?</h3><p>Click "Add Habit" to add a habit and tap days to mark them done (weekly cycle).</p></div>
+      <div class="faq-item"><h3>Is my data saved?</h3><p>Your habits are saved in your browser via LocalStorage—persistent across sessions.</p></div>
+      <div class="faq-item"><h3>Can I clear all habits?</h3><p>Yes. Click "Clear" to remove all habits in one go.</p></div>
+      <div class="faq-item"><h3>Is this tool free?</h3><p>Absolutely! It’s completely free to use and share.</p></div>
     </div>
   </main>
 
@@ -234,7 +174,6 @@
     const habitsEl = document.getElementById('habits');
     const addHabitBtn = document.getElementById('addHabit');
     const clearBtn = document.getElementById('clear');
-
     let habits = JSON.parse(localStorage.getItem('habits')) || [];
 
     function render() {
@@ -242,30 +181,25 @@
       habits.forEach((habit, i) => {
         const habitDiv = document.createElement('div');
         habitDiv.className = 'habit';
+
         const title = document.createElement('h2');
         title.textContent = habit.name;
 
         const days = document.createElement('div');
         days.className = 'days';
-        for (let d = 0; d < 7; d++) {
+        ['S','M','T','W','T','F','S'].forEach((dayLabel, d) => {
           const day = document.createElement('div');
           day.className = 'day';
-          day.textContent = ['S', 'M', 'T', 'W', 'T', 'F', 'S'][d];
+          day.textContent = dayLabel;
           if (habit.days.includes(d)) day.classList.add('done');
           day.addEventListener('click', () => {
-            if (habit.days.includes(d)) {
-              habit.days = habit.days.filter(x => x !== d);
-            } else {
-              habit.days.push(d);
-            }
-            save();
-            render();
+            habit.days.includes(d) ? habit.days = habit.days.filter(x => x !== d) : habit.days.push(d);
+            save(); render();
           });
           days.appendChild(day);
-        }
+        });
 
-        habitDiv.appendChild(title);
-        habitDiv.appendChild(days);
+        habitDiv.append(title, days);
         habitsEl.appendChild(habitDiv);
       });
     }
@@ -276,24 +210,15 @@
 
     addHabitBtn.addEventListener('click', () => {
       const name = prompt('Enter habit name:');
-      if (name) {
-        habits.push({ name, days: [] });
-        save();
-        render();
-      }
+      if (name) { habits.push({ name, days: [] }); save(); render(); }
     });
 
     clearBtn.addEventListener('click', () => {
-      if (confirm('Clear all habits?')) {
-        habits = [];
-        save();
-        render();
-      }
+      if (confirm('Clear all habits?')) { habits = []; save(); render(); }
     });
 
     render();
 
-    // FAQ Toggle
     document.querySelectorAll('.faq-item h3').forEach(q => {
       q.addEventListener('click', () => {
         const p = q.nextElementSibling;
@@ -302,5 +227,4 @@
     });
   </script>
 </body>
-
 </html>
