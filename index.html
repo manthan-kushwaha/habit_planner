@@ -1,223 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Habit Planner Free Tool | Manthan Kushwaha</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Use the free Habit Planner tool by Manthan Kushwaha to track daily habits, stay consistent, and boost productivity. Simple, effective, and free habit tracker.">
-  <meta name="keywords" content="habit planner, habit tracker, free habit tool, daily routine planner, productivity tool, goal tracker, online habit tracker">
+  <meta name="description"
+    content="Track and manage your daily habits easily with the Habit Planner Free Tool by Manthan Kushwaha. Stay productive with weekly tracking and progress visualization.">
+  <meta name="keywords"
+    content="habit planner, habit tracker tool, daily habit planner, productivity tool, weekly habit tracker, habit management app, habit tracker online">
   <meta name="author" content="Manthan Kushwaha">
   <meta name="publisher" content="GitHub">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://manthan-kushwaha.github.io/habit_planner/">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Habit Planner Free Tool | Manthan Kushwaha">
-  <meta property="og:description" content="Track your daily habits with the free Habit Planner tool. Stay consistent, improve productivity, and achieve your goals.">
-  <meta property="og:url" content="https://manthan-kushwaha.github.io/habit_planner/">
-  <meta property="og:type" content="website">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Habit Planner Free Tool | Manthan Kushwaha">
-  <meta name="twitter:description" content="Stay consistent and achieve your goals with this free online Habit Planner tool.">
-  
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9fafc;
+      background: #f4f6f8;
       margin: 0;
       padding: 20px;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    h1 {
-      color: #333;
-    }
-    #habitForm {
       display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    #habitForm input {
-      padding: 10px;
-      width: 250px;
-      margin-right: 10px;
-    }
-    #habitForm button {
-      padding: 10px 15px;
-      cursor: pointer;
-      background: #0077cc;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-    }
-    #habitList {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      padding: 0;
-      list-style: none;
-    }
-    #habitList li {
-      display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .app {
       background: #fff;
-      padding: 10px;
-      margin-bottom: 8px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 700px;
     }
-    #habitList li.completed {
-      text-decoration: line-through;
-      color: gray;
-      background: #e6f7e6;
+
+    .habits {
+      margin: 20px 0;
     }
-    button.remove {
-      background: red;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      padding: 5px 10px;
+
+    .habit {
+      margin-bottom: 20px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    .habit h2 {
+      margin: 0 0 10px;
+      font-size: 1.2em;
+    }
+
+    .days {
+      display: flex;
+      gap: 10px;
+    }
+
+    .day {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #444;
+      border-radius: 50%;
       cursor: pointer;
+      user-select: none;
+      font-weight: bold;
     }
-    main {
-      max-width: 800px;
-      margin: auto;
+
+    .day.done {
+      background: #4caf50;
+      color: #fff;
+      border-color: #4caf50;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #addHabit {
+      background: #007bff;
+      color: #fff;
+    }
+
+    #clear {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    /* Intro Card */
+    .intro {
+      margin-top: 30px;
       padding: 20px;
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      text-align: center;
     }
-    section {
-      margin-top: 30px;
+
+    .intro h2 {
+      margin-bottom: 10px;
     }
-    table {
+
+    .social-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
     }
-    table, th, td {
-      border: 1px solid #ddd;
+
+    .social-table th,
+    .social-table td {
+      padding: 10px;
+      border: 1px solid #ccc;
     }
-    th, td {
-      padding: 8px;
-      text-align: center;
+
+    /* FAQ */
+    .faq {
+      margin-top: 30px;
+      max-width: 700px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq h2 {
+      margin-bottom: 15px;
+    }
+
+    .faq-item {
+      margin-bottom: 12px;
+    }
+
+    .faq-item h3 {
+      margin: 0;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+
+    .faq-item p {
+      margin: 5px 0 0;
+      display: none;
     }
   </style>
 </head>
+
 <body>
-
-  <header>
-    <h1>📅 Habit Planner Free Tool</h1>
-    <p>Track your habits, stay consistent, and boost your productivity.</p>
-  </header>
-
-  <!-- Habit Tracker -->
-  <div id="habitForm">
-    <input type="text" id="habitInput" placeholder="Enter new habit...">
-    <button onclick="addHabit()">Add Habit</button>
-  </div>
-  <ul id="habitList"></ul>
-
-  <!-- SEO Content -->
   <main>
-    <section>
-      <h2>About This Tool</h2>
-      <p>The <strong>Habit Planner</strong> by <strong>Manthan Kushwaha</strong> is a free online tool to help you
-        create and track your daily habits. By organizing your routine, you can stay consistent, boost productivity,
-        and achieve long-term goals step by step.</p>
-    </section>
+    <div class="app">
+      <h1>📅 Habit Planner Tool</h1>
+      <div class="habits" id="habits"></div>
+      <div class="controls">
+        <button id="addHabit">➕ Add Habit</button>
+        <button id="clear">🗑 Clear</button>
+      </div>
+    </div>
 
-    <section>
-      <h2>👤 About Manthan Kushwaha</h2>
-      <p>Hi, I’m <strong>Manthan Kushwaha</strong>, an SEO Specialist, Digital Marketer, and Web Tools Creator.
-        I build simple tools that make life easier and productivity accessible to everyone.</p>
-      
-      <table>
-        <tr><th>Profile</th><th>Link</th></tr>
-        <tr><td>🌐 Website</td><td><a href="https://manthan-kushwaha.github.io" target="_blank">manthan-kushwaha.github.io</a></td></tr>
-        <tr><td>💼 LinkedIn</td><td><a href="https://linkedin.com/in/manthankushwaha" target="_blank">linkedin.com/in/manthankushwaha</a></td></tr>
-        <tr><td>🐦 Twitter</td><td><a href="https://twitter.com/yourseoguy" target="_blank">@yourseoguy</a></td></tr>
-        <tr><td>📸 Instagram</td><td><a href="https://instagram.com/yourseoguy" target="_blank">@yourseoguy</a></td></tr>
+    <!-- Intro Card -->
+    <div class="intro">
+      <h2>About the Creator</h2>
+      <p>Hi, I’m <strong>Manthan Kushwaha</strong>, passionate about creating free and useful web tools to improve
+        productivity, learning, and creativity.</p>
+
+      <table class="social-table">
+        <tr>
+          <th>Profile</th>
+          <th>Link</th>
+        </tr>
+        <tr>
+          <td>🌐 Portfolio</td>
+          <td><a href="https://manthan-kushwaha.github.io/" target="_blank">Visit Here</a></td>
+        </tr>
+        <tr>
+          <td>💼 LinkedIn</td>
+          <td><a href="https://www.linkedin.com/in/manthankushwaha" target="_blank">Connect</a></td>
+        </tr>
+        <tr>
+          <td>🐦 Twitter</td>
+          <td><a href="https://twitter.com/manthankush_" target="_blank">Follow</a></td>
+        </tr>
+        <tr>
+          <td>📷 Instagram</td>
+          <td><a href="https://instagram.com/manthan_kushwaha" target="_blank">Follow</a></td>
+        </tr>
       </table>
-    </section>
+    </div>
 
-    <section>
-      <h2>❓ FAQ - Habit Planner</h2>
-      <h3>1. What is a Habit Planner?</h3>
-      <p>A habit planner helps you track your daily habits, stay consistent, and achieve your goals.</p>
+    <!-- FAQ Section -->
+    <div class="faq">
+      <h2>❓ Frequently Asked Questions</h2>
 
-      <h3>2. Is this Habit Planner free?</h3>
-      <p>✅ Yes! It’s 100% free and works directly in your browser.</p>
+      <div class="faq-item">
+        <h3>How does the Habit Planner work?</h3>
+        <p>This tool allows you to add your daily/weekly habits and track them by clicking on the day circles.</p>
+      </div>
 
-      <h3>3. Do I need to sign up?</h3>
-      <p>❌ No account is needed. Just start adding your habits instantly.</p>
+      <div class="faq-item">
+        <h3>Is my data saved?</h3>
+        <p>Yes, your habits are saved locally in your browser using LocalStorage, so they remain even after closing the
+          page.</p>
+      </div>
 
-      <h3>4. Can I save my progress?</h3>
-      <p>Yes, your progress is saved in your browser’s local storage automatically.</p>
-    </section>
+      <div class="faq-item">
+        <h3>Can I clear all habits?</h3>
+        <p>Yes, just click on the 🗑 Clear button to reset everything.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Is this tool free?</h3>
+        <p>Absolutely! This tool is completely free to use and share.</p>
+      </div>
+    </div>
   </main>
 
   <script>
-    const habitInput = document.getElementById("habitInput");
-    const habitList = document.getElementById("habitList");
+    const habitsEl = document.getElementById('habits');
+    const addHabitBtn = document.getElementById('addHabit');
+    const clearBtn = document.getElementById('clear');
 
-    // Load saved habits
-    document.addEventListener("DOMContentLoaded", loadHabits);
+    let habits = JSON.parse(localStorage.getItem('habits')) || [];
 
-    function addHabit() {
-      const habit = habitInput.value.trim();
-      if (habit === "") return;
+    function render() {
+      habitsEl.innerHTML = '';
+      habits.forEach((habit, i) => {
+        const habitDiv = document.createElement('div');
+        habitDiv.className = 'habit';
+        const title = document.createElement('h2');
+        title.textContent = habit.name;
 
-      const li = createHabitElement(habit);
-      habitList.appendChild(li);
+        const days = document.createElement('div');
+        days.className = 'days';
+        for (let d = 0; d < 7; d++) {
+          const day = document.createElement('div');
+          day.className = 'day';
+          day.textContent = ['S', 'M', 'T', 'W', 'T', 'F', 'S'][d];
+          if (habit.days.includes(d)) day.classList.add('done');
+          day.addEventListener('click', () => {
+            if (habit.days.includes(d)) {
+              habit.days = habit.days.filter(x => x !== d);
+            } else {
+              habit.days.push(d);
+            }
+            save();
+            render();
+          });
+          days.appendChild(day);
+        }
 
-      saveHabits();
-      habitInput.value = "";
-    }
-
-    function createHabitElement(habitText, completed = false) {
-      const li = document.createElement("li");
-      li.textContent = habitText;
-      if (completed) li.classList.add("completed");
-
-      li.addEventListener("click", () => {
-        li.classList.toggle("completed");
-        saveHabits();
-      });
-
-      const removeBtn = document.createElement("button");
-      removeBtn.textContent = "Remove";
-      removeBtn.classList.add("remove");
-      removeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        li.remove();
-        saveHabits();
-      });
-
-      li.appendChild(removeBtn);
-      return li;
-    }
-
-    function saveHabits() {
-      const habits = [];
-      document.querySelectorAll("#habitList li").forEach(li => {
-        habits.push({ text: li.childNodes[0].textContent, completed: li.classList.contains("completed") });
-      });
-      localStorage.setItem("habits", JSON.stringify(habits));
-    }
-
-    function loadHabits() {
-      const saved = JSON.parse(localStorage.getItem("habits")) || [];
-      saved.forEach(habit => {
-        const li = createHabitElement(habit.text, habit.completed);
-        habitList.appendChild(li);
+        habitDiv.appendChild(title);
+        habitDiv.appendChild(days);
+        habitsEl.appendChild(habitDiv);
       });
     }
+
+    function save() {
+      localStorage.setItem('habits', JSON.stringify(habits));
+    }
+
+    addHabitBtn.addEventListener('click', () => {
+      const name = prompt('Enter habit name:');
+      if (name) {
+        habits.push({ name, days: [] });
+        save();
+        render();
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (confirm('Clear all habits?')) {
+        habits = [];
+        save();
+        render();
+      }
+    });
+
+    render();
+
+    // FAQ Toggle
+    document.querySelectorAll('.faq-item h3').forEach(q => {
+      q.addEventListener('click', () => {
+        const p = q.nextElementSibling;
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+      });
+    });
   </script>
 </body>
+
 </html>
