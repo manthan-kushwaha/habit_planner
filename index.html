@@ -3,22 +3,32 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Habit Planner Free Tool | Manthan Kushwaha</title>
+  <title>Habit Planner Tool | Advanced Version</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Track and manage your daily habits easily with the Habit Planner Free Tool by Manthan Kushwaha. Stay productive with weekly tracking and progress visualization.">
+  <meta name="description" content="An advanced habit tracking tool with real-time data persistence using Firestore.">
   <meta name="keywords"
-    content="habit planner, habit tracker tool, daily habit planner, productivity tool, weekly habit tracker, habit management app, habit tracker online">
+    content="habit planner, habit tracker, productivity, firebase, firestore, real-time, data persistence">
   <meta name="author" content="Manthan Kushwaha">
-  <meta name="publisher" content="GitHub">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <link rel="canonical" href="https://manthan-kushwaha.github.io/habit_planner/">
-  <link rel="icon" href="https://media.licdn.com/dms/image/v2/D5635AQF8DEgIb-KRjA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1723006679126?e=1756126800&v=beta&t=qDBrHlcpulpkidSfroyXgJ-GBzyOHRaj1-cfvZBdTT4" type="image/png">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
   <style>
+    :root {
+      --primary-bg: #f8f9fa;
+      --secondary-bg: #ffffff;
+      --card-bg: #e9ecef;
+      --text-color: #343a40;
+      --accent-color: #6a0dad;
+      --accent-hover: #5a0a8e;
+      --border-color: #ced4da;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --success-color: #4CAF50;
+      --danger-color: #dc3545;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      font-family: 'Nunito', sans-serif;
+      background: var(--primary-bg);
+      color: var(--text-color);
       margin: 0;
       padding: 20px;
     }
@@ -29,54 +39,92 @@
       margin: auto;
     }
 
+    h1,
+    h2,
+    h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
     /* TOOL SECTION */
     .app {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: var(--secondary-bg);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      max-width: 880px;
+      width: 100%;
+      text-align: center;
       margin-bottom: 30px;
+    }
+
+    .app h1 {
+      margin: 0 0 15px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--accent-color);
     }
 
     .habits {
       margin: 20px 0;
     }
 
-    .habit {
-      margin-bottom: 20px;
-      padding: 12px;
-      border: 1px solid #ccc;
+    .habit-card {
+      background: var(--card-bg);
+      padding: 20px;
       border-radius: 10px;
-      background: #fafafa;
+      margin-bottom: 15px;
+      font-size: 16px;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .habit h2 {
-      margin: 0 0 10px;
-      font-size: 1.2em;
+    .habit-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .habit-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-color);
     }
 
     .days {
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .day {
-      width: 35px;
-      height: 35px;
+      width: 38px;
+      height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #444;
+      border: 2px solid var(--accent-color);
       border-radius: 50%;
       cursor: pointer;
       user-select: none;
       font-weight: bold;
+      color: var(--accent-color);
+      transition: background-color 0.2s, color 0.2s;
     }
 
     .day.done {
-      background: #4caf50;
+      background: var(--success-color);
       color: #fff;
-      border-color: #4caf50;
+      border-color: var(--success-color);
+    }
+
+    .day:hover {
+      background: var(--accent-color);
+      color: #fff;
     }
 
     .controls {
@@ -87,27 +135,83 @@
     }
 
     button {
-      padding: 8px 14px;
+      padding: 12px 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
+      transition: all .25s ease-in-out;
     }
 
-    #addHabit {
-      background: #007bff;
+    #addHabitBtn {
+      background: var(--accent-color);
       color: #fff;
+      box-shadow: 0 4px 12px rgba(106, 13, 13, 0.3);
     }
 
-    #clear {
-      background: #dc3545;
+    #addHabitBtn:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 16px rgba(106, 13, 13, 0.4);
+      transform: translateY(-2px);
+    }
+
+    #clearBtn {
+      background: var(--danger-color);
       color: #fff;
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+    
+    #clearBtn:hover {
+      background: #c82333;
+      box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+      transform: translateY(-2px);
+    }
+
+    #loading {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--accent-color);
+      display: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: var(--secondary-bg);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-content button {
+      margin: 5px;
     }
 
     /* BLOG LAYOUT */
     .blog-layout {
       display: flex;
-      gap: 20px;
+      gap: 30px;
+      flex-wrap: wrap;
     }
 
     .left-col {
@@ -119,26 +223,34 @@
     }
 
     section {
-      background: #fff;
-      padding: 20px;
+      background: var(--secondary-bg);
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow);
       margin-bottom: 30px;
     }
 
     .faq-item {
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .faq-item h3 {
       margin: 0;
       font-size: 1.1em;
       cursor: pointer;
+      color: var(--accent-color);
+      transition: color 0.2s;
+    }
+    
+    .faq-item h3:hover {
+      color: var(--accent-hover);
     }
 
     .faq-item p {
       margin: 5px 0 0;
       display: none;
+      color: var(--text-color);
+      line-height: 1.6;
     }
 
     /* AUTHOR CARD */
@@ -151,17 +263,32 @@
       height: 120px;
       border-radius: 50%;
       margin-bottom: 10px;
+      box-shadow: var(--shadow);
     }
 
     .social-links {
       width: 100%;
-      margin-top: 15px;
+      margin-top: 20px;
       border-collapse: collapse;
+      text-align: left;
     }
 
     .social-links td {
-      padding: 6px;
-      border: 1px solid #ccc;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .blog-layout {
+            flex-direction: column;
+        }
+        .left-col, .right-col {
+            flex: auto;
+        }
+        .app {
+            padding: 20px;
+        }
     }
   </style>
 </head>
@@ -171,12 +298,35 @@
     <!-- TOOL FULL WIDTH -->
     <div class="app">
       <h1>📅 Habit Planner Tool</h1>
+      <p style="color: grey; font-size: 14px;">Your user ID: <span id="userIdDisplay"></span></p>
       <div class="habits" id="habits"></div>
       <div class="controls">
-        <button id="addHabit">➕ Add Habit</button>
-        <button id="clear">🗑 Clear</button>
+        <button id="addHabitBtn">➕ Add Habit</button>
+        <button id="clearBtn">🗑 Clear All</button>
       </div>
     </div>
+    <div id="loading">Connecting to database...</div>
+
+    <!-- Modal for adding habit -->
+    <div id="addHabitModal" class="modal">
+      <div class="modal-content">
+        <h3>Add New Habit</h3>
+        <input type="text" id="newHabitInput" placeholder="Enter habit name...">
+        <button id="confirmAddBtn">Add</button>
+        <button id="cancelAddBtn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Modal for clearing habits -->
+    <div id="clearHabitsModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure?</h3>
+            <p>This will permanently delete all of your habits.</p>
+            <button id="confirmClearBtn" style="background: var(--danger-color); color: white;">Yes, Clear</button>
+            <button id="cancelClearBtn">Cancel</button>
+        </div>
+    </div>
+
 
     <!-- BLOG ROW -->
     <div class="blog-layout">
@@ -185,9 +335,9 @@
         <section class="intro">
           <h1>Habit Planner Free Tool by Manthan Kushwaha</h1>
           <p>
-            The <strong>Habit Planner Free Tool</strong> is a simple yet powerful web application designed 
-            to help you build, track, and maintain positive daily habits. 
-            By visualizing your weekly progress, this tool keeps you motivated and consistent, 
+            The <strong>Habit Planner Free Tool</strong> is a simple yet powerful web application designed
+            to help you build, track, and maintain positive daily habits.
+            By visualizing your weekly progress, this tool keeps you motivated and consistent,
             turning small routines into long-lasting habits.
           </p>
         </section>
@@ -195,10 +345,10 @@
         <section class="what-is">
           <h2>What is the Habit Planner Tool?</h2>
           <p>
-            The Habit Planner is an online <em>habit tracking tool</em> where you can add new habits, 
-            mark your progress across the days of the week, and reset anytime you want. 
-            It uses <code>localStorage</code> in your browser, meaning your data is stored safely on 
-            your device and loads instantly every time you revisit the page — no sign-up required.
+            The Habit Planner is an online <em>habit tracking tool</em> where you can add new habits,
+            mark your progress across the days of the week, and reset anytime you want.
+            It uses a powerful backend to store your data safely, allowing for multi-device synchronization and a seamless
+            experience — no sign-up required.
           </p>
         </section>
 
@@ -207,9 +357,9 @@
           <ul>
             <li>📅 <strong>Weekly Tracking:</strong> Track your habits across all 7 days.</li>
             <li>⚡ <strong>Boost Productivity:</strong> Stay consistent and build discipline.</li>
-            <li>🔒 <strong>Secure & Private:</strong> Your data is saved only in your browser (localStorage).</li>
+            <li>🔒 <strong>Secure & Private:</strong> Your data is saved securely to the cloud.</li>
             <li>🎯 <strong>Simple to Use:</strong> Minimal design with easy controls.</li>
-            <li>💡 <strong>No Account Needed:</strong> Works instantly — free and offline-friendly.</li>
+            <li>💡 <strong>Real-time Sync:</strong> Changes are instantly updated across all your devices.</li>
           </ul>
         </section>
 
@@ -219,7 +369,7 @@
             <li>➕ Add unlimited habits with custom names.</li>
             <li>✅ Mark days (Sunday–Saturday) as completed by clicking.</li>
             <li>🗑 Clear all habits instantly if needed.</li>
-            <li>💾 Auto-save progress using browser localStorage.</li>
+            <li>💾 Auto-save progress using real-time Firestore database.</li>
             <li>🔄 Interactive UI with real-time updates.</li>
           </ul>
         </section>
@@ -227,7 +377,7 @@
         <section class="present-data">
           <h2>How Data is Stored</h2>
           <p>
-            The tool uses <code>localStorage</code> to store all habit information. 
+            The tool uses a Firestore database to store all habit information.
             Each habit is saved as an object with:
           </p>
           <pre>
@@ -237,7 +387,8 @@
 }
           </pre>
           <p>
-            Data never leaves your device, ensuring <strong>100% privacy and offline usage</strong>.
+            Data is stored in the cloud, allowing you to access your habits from anywhere. Your unique User ID is
+            displayed at the top of the tool for easy reference.
           </p>
         </section>
 
@@ -249,7 +400,7 @@
           </div>
           <div class="faq-item">
             <h3>2. Do I need internet connection to use it?</h3>
-            <p>🌐 Only the first time to load the tool. After that, it works offline.</p>
+            <p>🌐 Yes, an internet connection is required to sync your habits with the database.</p>
           </div>
           <div class="faq-item">
             <h3>3. Can I add unlimited habits?</h3>
@@ -257,7 +408,7 @@
           </div>
           <div class="faq-item">
             <h3>4. Where is my data stored?</h3>
-            <p>🔒 All data is stored in your browser using localStorage.</p>
+            <p>🔒 All data is stored in a secure Firestore database associated with your unique user ID.</p>
           </div>
         </section>
       </div>
@@ -267,18 +418,36 @@
         <section class="about-author">
           <h2>About Manthan Kushwaha</h2>
           <div class="profile-card">
-            <img src="https://media.licdn.com/dms/image/v2/D5635AQF8DEgIb-KRjA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1723006679126?e=1756126800&v=beta&t=qDBrHlcpulpkidSfroyXgJ-GBzyOHRaj1-cfvZBdTT4" alt="Manthan Kushwaha" />
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5635AQF8DEgIb-KRjA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1723006679126?e=1756126800&v=beta&t=qDBrHlcpulpkidSfroyXgJ-GBzyOHRaj1-cfvZBdTT4"
+              alt="Manthan Kushwaha" />
             <h3>👨‍💻 Manthan Kushwaha</h3>
             <p>
-              Digital Marketer, SEO Analyst, and Developer passionate about creating free tools 
+              Digital Marketer, SEO Analyst, and Developer passionate about creating free tools
               to help people improve productivity, learning, and online growth.
             </p>
             <table class="social-links">
-              <tr><td>🌐 Website:</td><td><a href="https://manthan-kushwaha.github.io/" target="_blank">manthan-kushwaha.github.io</a></td></tr>
-              <tr><td>💼 LinkedIn:</td><td><a href="https://www.linkedin.com/in/manthan-kushwaha/" target="_blank">linkedin.com/in/manthan-kushwaha</a></td></tr>
-              <tr><td>🐦 Twitter/X:</td><td><a href="https://twitter.com/manthankush_" target="_blank">@manthankush_</a></td></tr>
-              <tr><td>📷 Instagram:</td><td><a href="https://www.instagram.com/manthankush_" target="_blank">@manthankush_</a></td></tr>
-              <tr><td>📧 Email:</td><td><a href="mailto:manthankushseo@gmail.com">manthankushseo@gmail.com</a></td></tr>
+              <tr>
+                <td>🌐 Website:</td>
+                <td><a href="https://manthan-kushwaha.github.io/" target="_blank">manthan-kushwaha.github.io</a></td>
+              </tr>
+              <tr>
+                <td>💼 LinkedIn:</td>
+                <td><a href="https://www.linkedin.com/in/manthan-kushwaha/"
+                    target="_blank">linkedin.com/in/manthan-kushwaha</a></td>
+              </tr>
+              <tr>
+                <td>🐦 Twitter/X:</td>
+                <td><a href="https://twitter.com/manthankush_" target="_blank">@manthankush_</a></td>
+              </tr>
+              <tr>
+                <td>📷 Instagram:</td>
+                <td><a href="https://www.instagram.com/manthankush_" target="_blank">@manthankush_</a></td>
+              </tr>
+              <tr>
+                <td>📧 Email:</td>
+                <td><a href="mailto:manthankushseo@gmail.com">manthankushseo@gmail.com</a></td>
+              </tr>
             </table>
           </div>
         </section>
@@ -286,55 +455,180 @@
     </div>
   </main>
 
-  <script>
-    const habitsEl = document.getElementById('habits');
-    const addHabitBtn = document.getElementById('addHabit');
-    const clearBtn = document.getElementById('clear');
-    let habits = JSON.parse(localStorage.getItem('habits')) || [];
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, query, onSnapshot, doc, setDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    function render() {
+    const addHabitBtn = document.getElementById('addHabitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const habitsEl = document.getElementById('habits');
+    const loadingEl = document.getElementById('loading');
+    const userIdDisplay = document.getElementById('userIdDisplay');
+
+    // Modal elements
+    const addHabitModal = document.getElementById('addHabitModal');
+    const newHabitInput = document.getElementById('newHabitInput');
+    const confirmAddBtn = document.getElementById('confirmAddBtn');
+    const cancelAddBtn = document.getElementById('cancelAddBtn');
+    
+    const clearHabitsModal = document.getElementById('clearHabitsModal');
+    const confirmClearBtn = document.getElementById('confirmClearBtn');
+    const cancelClearBtn = document.getElementById('cancelClearBtn');
+
+    let db;
+    let auth;
+    let userId;
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    // Initialize Firebase and listen for auth state
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        userId = user.uid;
+        userIdDisplay.textContent = userId;
+        loadingEl.style.display = 'none';
+        
+        // Start listening to habits collection for real-time updates
+        const q = query(collection(db, `artifacts/${appId}/users/${userId}/habits`));
+        onSnapshot(q, (querySnapshot) => {
+          const habits = [];
+          querySnapshot.forEach((doc) => {
+            habits.push({ id: doc.id, ...doc.data() });
+          });
+          renderHabits(habits);
+        });
+
+      } else {
+        // Sign in anonymously if no user is authenticated
+        try {
+          if (initialAuthToken) {
+            await signInWithCustomToken(auth, initialAuthToken);
+          } else {
+            await signInAnonymously(auth);
+          }
+        } catch (error) {
+          console.error("Error signing in:", error);
+          loadingEl.textContent = "Failed to connect. Please try again.";
+        }
+      }
+    });
+
+    // Renders the list of habits from Firestore data
+    function renderHabits(habits) {
       habitsEl.innerHTML = '';
+      if (habits.length === 0) {
+        habitsEl.innerHTML = '<p style="text-align: center; color: grey;">No habits yet. Click "➕ Add Habit" to get started!</p>';
+      }
       habits.forEach((habit) => {
         const habitDiv = document.createElement('div');
-        habitDiv.className = 'habit';
+        habitDiv.className = 'habit-card';
 
-        const title = document.createElement('h2');
+        const habitContent = document.createElement('div');
+        habitContent.className = 'habit-content';
+        
+        const title = document.createElement('div');
+        title.className = 'habit-title';
         title.textContent = habit.name;
 
         const days = document.createElement('div');
         days.className = 'days';
-        ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach((dayLabel, d) => {
+        const dayLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        dayLabels.forEach((dayLabel, d) => {
           const day = document.createElement('div');
           day.className = 'day';
           day.textContent = dayLabel;
           if (habit.days.includes(d)) day.classList.add('done');
-          day.addEventListener('click', () => {
-            habit.days.includes(d) ? habit.days = habit.days.filter(x => x !== d) : habit.days.push(d);
-            save(); render();
+          day.addEventListener('click', async () => {
+            const newDays = habit.days.includes(d) ?
+              habit.days.filter(x => x !== d) :
+              [...habit.days, d];
+            try {
+              await setDoc(doc(db, `artifacts/${appId}/users/${userId}/habits`, habit.id), {
+                name: habit.name,
+                days: newDays
+              });
+            } catch (error) {
+              console.error("Error updating document: ", error);
+            }
           });
           days.appendChild(day);
         });
 
-        habitDiv.append(title, days);
+        habitContent.append(title, days);
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '✖';
+        deleteBtn.style.cssText = 'background: none; color: var(--danger-color); border: none; font-size: 1.5rem;';
+        deleteBtn.addEventListener('click', async () => {
+            try {
+              await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/habits`, habit.id));
+            } catch (error) {
+              console.error("Error deleting document: ", error);
+            }
+        });
+
+        habitDiv.append(habitContent, deleteBtn);
         habitsEl.appendChild(habitDiv);
       });
     }
 
-    function save() {
-      localStorage.setItem('habits', JSON.stringify(habits));
-    }
-
+    // Event listeners for UI controls
     addHabitBtn.addEventListener('click', () => {
-      const name = prompt('Enter habit name:');
-      if (name) { habits.push({ name, days: [] }); save(); render(); }
+      addHabitModal.style.display = 'flex';
+      newHabitInput.focus();
     });
 
+    confirmAddBtn.addEventListener('click', async () => {
+      const name = newHabitInput.value.trim();
+      if (name) {
+        try {
+          await setDoc(doc(collection(db, `artifacts/${appId}/users/${userId}/habits`)), {
+            name: name,
+            days: []
+          });
+          newHabitInput.value = '';
+          addHabitModal.style.display = 'none';
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      }
+    });
+
+    cancelAddBtn.addEventListener('click', () => {
+      addHabitModal.style.display = 'none';
+      newHabitInput.value = '';
+    });
+    
     clearBtn.addEventListener('click', () => {
-      if (confirm('Clear all habits?')) { habits = []; save(); render(); }
+        clearHabitsModal.style.display = 'flex';
+    });
+    
+    confirmClearBtn.addEventListener('click', async () => {
+        clearHabitsModal.style.display = 'none';
+        const q = query(collection(db, `artifacts/${appId}/users/${userId}/habits`));
+        try {
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach(async (doc) => {
+                await deleteDoc(doc.ref);
+            });
+        } catch (error) {
+            console.error("Error clearing habits: ", error);
+        }
+    });
+    
+    cancelClearBtn.addEventListener('click', () => {
+        clearHabitsModal.style.display = 'none';
     });
 
-    render();
 
+    // FAQ toggle
     document.querySelectorAll('.faq-item h3').forEach(q => {
       q.addEventListener('click', () => {
         const p = q.nextElementSibling;
@@ -343,4 +637,5 @@
     });
   </script>
 </body>
+
 </html>
