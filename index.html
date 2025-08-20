@@ -3,11 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Habit Planner Tool | Advanced Version</title>
+  <title>Habit Planner Tool | Local Version</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="An advanced habit tracking tool with real-time data persistence using Firestore.">
+  <meta name="description"
+    content="A self-contained habit tracking tool with data persistence using the browser's local storage.">
   <meta name="keywords"
-    content="habit planner, habit tracker, productivity, firebase, firestore, real-time, data persistence">
+    content="habit planner, habit tracker, productivity, local storage, no sign-up, offline functionality">
   <meta name="author" content="Manthan Kushwaha">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Nunito:wght@400;700&display=swap"
     rel="stylesheet">
@@ -160,18 +161,11 @@
       color: #fff;
       box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
     }
-    
+
     #clearBtn:hover {
       background: #c82333;
-      box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+      box-shadow: 6px 16px rgba(220, 53, 69, 0.4);
       transform: translateY(-2px);
-    }
-
-    #loading {
-      text-align: center;
-      margin-top: 20px;
-      color: var(--accent-color);
-      display: none;
     }
 
     .modal {
@@ -241,7 +235,7 @@
       color: var(--accent-color);
       transition: color 0.2s;
     }
-    
+
     .faq-item h3:hover {
       color: var(--accent-hover);
     }
@@ -277,18 +271,21 @@
       padding: 8px;
       border: 1px solid var(--border-color);
     }
-    
+
     /* Responsive styles */
     @media (max-width: 768px) {
-        .blog-layout {
-            flex-direction: column;
-        }
-        .left-col, .right-col {
-            flex: auto;
-        }
-        .app {
-            padding: 20px;
-        }
+      .blog-layout {
+        flex-direction: column;
+      }
+
+      .left-col,
+      .right-col {
+        flex: auto;
+      }
+
+      .app {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -298,14 +295,12 @@
     <!-- TOOL FULL WIDTH -->
     <div class="app">
       <h1>📅 Habit Planner Tool</h1>
-      <p style="color: grey; font-size: 14px;">Your user ID: <span id="userIdDisplay"></span></p>
       <div class="habits" id="habits"></div>
       <div class="controls">
         <button id="addHabitBtn">➕ Add Habit</button>
         <button id="clearBtn">🗑 Clear All</button>
       </div>
     </div>
-    <div id="loading">Connecting to database...</div>
 
     <!-- Modal for adding habit -->
     <div id="addHabitModal" class="modal">
@@ -319,14 +314,13 @@
 
     <!-- Modal for clearing habits -->
     <div id="clearHabitsModal" class="modal">
-        <div class="modal-content">
-            <h3>Are you sure?</h3>
-            <p>This will permanently delete all of your habits.</p>
-            <button id="confirmClearBtn" style="background: var(--danger-color); color: white;">Yes, Clear</button>
-            <button id="cancelClearBtn">Cancel</button>
-        </div>
+      <div class="modal-content">
+        <h3>Are you sure?</h3>
+        <p>This will permanently delete all of your habits.</p>
+        <button id="confirmClearBtn" style="background: var(--danger-color); color: white;">Yes, Clear</button>
+        <button id="cancelClearBtn">Cancel</button>
+      </div>
     </div>
-
 
     <!-- BLOG ROW -->
     <div class="blog-layout">
@@ -347,8 +341,7 @@
           <p>
             The Habit Planner is an online <em>habit tracking tool</em> where you can add new habits,
             mark your progress across the days of the week, and reset anytime you want.
-            It uses a powerful backend to store your data safely, allowing for multi-device synchronization and a seamless
-            experience — no sign-up required.
+            It saves your data to the browser, which means it will be there the next time you visit.
           </p>
         </section>
 
@@ -357,9 +350,9 @@
           <ul>
             <li>📅 <strong>Weekly Tracking:</strong> Track your habits across all 7 days.</li>
             <li>⚡ <strong>Boost Productivity:</strong> Stay consistent and build discipline.</li>
-            <li>🔒 <strong>Secure & Private:</strong> Your data is saved securely to the cloud.</li>
+            <li>🔒 <strong>Secure & Private:</strong> Your data is saved securely to your browser.</li>
             <li>🎯 <strong>Simple to Use:</strong> Minimal design with easy controls.</li>
-            <li>💡 <strong>Real-time Sync:</strong> Changes are instantly updated across all your devices.</li>
+            <li>💡 <strong>Instant Save:</strong> Your changes are instantly saved to your device.</li>
           </ul>
         </section>
 
@@ -369,16 +362,16 @@
             <li>➕ Add unlimited habits with custom names.</li>
             <li>✅ Mark days (Sunday–Saturday) as completed by clicking.</li>
             <li>🗑 Clear all habits instantly if needed.</li>
-            <li>💾 Auto-save progress using real-time Firestore database.</li>
-            <li>🔄 Interactive UI with real-time updates.</li>
+            <li>💾 Auto-save progress using the browser's local storage.</li>
+            <li>🔄 Interactive UI with instant updates.</li>
           </ul>
         </section>
 
         <section class="present-data">
           <h2>How Data is Stored</h2>
           <p>
-            The tool uses a Firestore database to store all habit information.
-            Each habit is saved as an object with:
+            The tool uses the browser's **local storage** to save all habit information.
+            Each habit is saved as an object in an array with:
           </p>
           <pre>
 {
@@ -387,8 +380,7 @@
 }
           </pre>
           <p>
-            Data is stored in the cloud, allowing you to access your habits from anywhere. Your unique User ID is
-            displayed at the top of the tool for easy reference.
+            Your data is stored directly on your computer, so it is not synced across other devices.
           </p>
         </section>
 
@@ -400,7 +392,7 @@
           </div>
           <div class="faq-item">
             <h3>2. Do I need internet connection to use it?</h3>
-            <p>🌐 Yes, an internet connection is required to sync your habits with the database.</p>
+            <p>🌐 No, this version works even without an internet connection once the page has loaded.</p>
           </div>
           <div class="faq-item">
             <h3>3. Can I add unlimited habits?</h3>
@@ -408,7 +400,7 @@
           </div>
           <div class="faq-item">
             <h3>4. Where is my data stored?</h3>
-            <p>🔒 All data is stored in a secure Firestore database associated with your unique user ID.</p>
+            <p>🔒 All data is stored in your web browser's local storage.</p>
           </div>
         </section>
       </div>
@@ -455,84 +447,55 @@
     </div>
   </main>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, query, onSnapshot, doc, setDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  <script>
+    // This code uses the browser's built-in localStorage for data persistence.
+    // This means no external services (like Firebase) are needed.
+    // The data will be saved on the specific browser and computer you're using.
 
+    const HABITS_STORAGE_KEY = 'my-habits';
     const addHabitBtn = document.getElementById('addHabitBtn');
     const clearBtn = document.getElementById('clearBtn');
     const habitsEl = document.getElementById('habits');
-    const loadingEl = document.getElementById('loading');
-    const userIdDisplay = document.getElementById('userIdDisplay');
 
     // Modal elements
     const addHabitModal = document.getElementById('addHabitModal');
     const newHabitInput = document.getElementById('newHabitInput');
     const confirmAddBtn = document.getElementById('confirmAddBtn');
     const cancelAddBtn = document.getElementById('cancelAddBtn');
-    
+
     const clearHabitsModal = document.getElementById('clearHabitsModal');
     const confirmClearBtn = document.getElementById('confirmClearBtn');
     const cancelClearBtn = document.getElementById('cancelClearBtn');
 
-    let db;
-    let auth;
-    let userId;
+    let habits = [];
 
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    // Function to save habits to local storage
+    function saveHabits() {
+      localStorage.setItem(HABITS_STORAGE_KEY, JSON.stringify(habits));
+    }
 
-    // Initialize Firebase and listen for auth state
-    const app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    db = getFirestore(app);
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        userId = user.uid;
-        userIdDisplay.textContent = userId;
-        loadingEl.style.display = 'none';
-        
-        // Start listening to habits collection for real-time updates
-        const q = query(collection(db, `artifacts/${appId}/users/${userId}/habits`));
-        onSnapshot(q, (querySnapshot) => {
-          const habits = [];
-          querySnapshot.forEach((doc) => {
-            habits.push({ id: doc.id, ...doc.data() });
-          });
-          renderHabits(habits);
-        });
-
-      } else {
-        // Sign in anonymously if no user is authenticated
-        try {
-          if (initialAuthToken) {
-            await signInWithCustomToken(auth, initialAuthToken);
-          } else {
-            await signInAnonymously(auth);
-          }
-        } catch (error) {
-          console.error("Error signing in:", error);
-          loadingEl.textContent = "Failed to connect. Please try again.";
-        }
+    // Function to load habits from local storage
+    function loadHabits() {
+      const storedHabits = localStorage.getItem(HABITS_STORAGE_KEY);
+      if (storedHabits) {
+        habits = JSON.parse(storedHabits);
       }
-    });
+      renderHabits();
+    }
 
-    // Renders the list of habits from Firestore data
-    function renderHabits(habits) {
+    // Renders the list of habits from the local habits array
+    function renderHabits() {
       habitsEl.innerHTML = '';
       if (habits.length === 0) {
         habitsEl.innerHTML = '<p style="text-align: center; color: grey;">No habits yet. Click "➕ Add Habit" to get started!</p>';
       }
-      habits.forEach((habit) => {
+      habits.forEach((habit, index) => {
         const habitDiv = document.createElement('div');
         habitDiv.className = 'habit-card';
 
         const habitContent = document.createElement('div');
         habitContent.className = 'habit-content';
-        
+
         const title = document.createElement('div');
         title.className = 'habit-title';
         title.textContent = habit.name;
@@ -545,33 +508,28 @@
           day.className = 'day';
           day.textContent = dayLabel;
           if (habit.days.includes(d)) day.classList.add('done');
-          day.addEventListener('click', async () => {
+          day.addEventListener('click', () => {
+            // Update the days array for the habit
             const newDays = habit.days.includes(d) ?
               habit.days.filter(x => x !== d) :
               [...habit.days, d];
-            try {
-              await setDoc(doc(db, `artifacts/${appId}/users/${userId}/habits`, habit.id), {
-                name: habit.name,
-                days: newDays
-              });
-            } catch (error) {
-              console.error("Error updating document: ", error);
-            }
+            habits[index].days = newDays;
+            // Save and re-render
+            saveHabits();
+            renderHabits();
           });
           days.appendChild(day);
         });
 
         habitContent.append(title, days);
-        
+
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '✖';
         deleteBtn.style.cssText = 'background: none; color: var(--danger-color); border: none; font-size: 1.5rem;';
-        deleteBtn.addEventListener('click', async () => {
-            try {
-              await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/habits`, habit.id));
-            } catch (error) {
-              console.error("Error deleting document: ", error);
-            }
+        deleteBtn.addEventListener('click', () => {
+          habits.splice(index, 1);
+          saveHabits();
+          renderHabits();
         });
 
         habitDiv.append(habitContent, deleteBtn);
@@ -585,19 +543,17 @@
       newHabitInput.focus();
     });
 
-    confirmAddBtn.addEventListener('click', async () => {
+    confirmAddBtn.addEventListener('click', () => {
       const name = newHabitInput.value.trim();
       if (name) {
-        try {
-          await setDoc(doc(collection(db, `artifacts/${appId}/users/${userId}/habits`)), {
-            name: name,
-            days: []
-          });
-          newHabitInput.value = '';
-          addHabitModal.style.display = 'none';
-        } catch (error) {
-          console.error("Error adding document: ", error);
-        }
+        habits.push({
+          name: name,
+          days: []
+        });
+        saveHabits();
+        renderHabits();
+        newHabitInput.value = '';
+        addHabitModal.style.display = 'none';
       }
     });
 
@@ -605,26 +561,20 @@
       addHabitModal.style.display = 'none';
       newHabitInput.value = '';
     });
-    
+
     clearBtn.addEventListener('click', () => {
-        clearHabitsModal.style.display = 'flex';
+      clearHabitsModal.style.display = 'flex';
     });
-    
-    confirmClearBtn.addEventListener('click', async () => {
-        clearHabitsModal.style.display = 'none';
-        const q = query(collection(db, `artifacts/${appId}/users/${userId}/habits`));
-        try {
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach(async (doc) => {
-                await deleteDoc(doc.ref);
-            });
-        } catch (error) {
-            console.error("Error clearing habits: ", error);
-        }
+
+    confirmClearBtn.addEventListener('click', () => {
+      clearHabitsModal.style.display = 'none';
+      habits = [];
+      saveHabits();
+      renderHabits();
     });
-    
+
     cancelClearBtn.addEventListener('click', () => {
-        clearHabitsModal.style.display = 'none';
+      clearHabitsModal.style.display = 'none';
     });
 
 
@@ -635,6 +585,9 @@
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
       });
     });
+
+    // Initial load
+    window.addEventListener('load', loadHabits);
   </script>
 </body>
 
